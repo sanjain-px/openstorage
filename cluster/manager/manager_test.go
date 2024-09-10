@@ -146,6 +146,7 @@ func TestRemoveOnlineNode(t *testing.T) {
 	err = testManager.Remove([]api.Node{nodeToRemove}, false)
 	assert.ErrorContains(t, err, fmt.Sprintf(decommissionErrMsg, testNodeID))
 
+	// when force flag is true, we shouldn't abort due to node status
 	mockListener.EXPECT().String().Return(testNodeID)
 	mockListener.EXPECT().MarkNodeDown(gomock.Any()).Return(mockErr)
 
